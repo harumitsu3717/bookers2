@@ -6,11 +6,62 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/57875cad45.js" crossorigin="anonymous"></script>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <header class="navber navber-expand-lg bg-dark p-2">
+      <div class="nav">
+        <div class="container d-flex ">
+        <%= link_to "Bookers", top_path, class: 'navber-brand text-light my-auto h5' %>
+          <ul class="navber-nav ml-auto d-flex my-auto">
+            <% if user_signed_in? %>
+              <li class="nav-link">
+                <i class="fa-solid fa-house text-light"></i>
+                <%= link_to "Home", user_path(current_user.id), class: 'text-light' %>
+              </li>
+              <li class="nav-link">
+                <i class="fa-solid fa-users text-light"></i>
+                <%= link_to "Users", users_path, class: 'text-light' %>
+              </li>
+              <li class="nav-link">
+                <i class="fa-solid fa-book-open text-light"></i>
+                <%= link_to "Books", books_path, class: 'text-light' %>
+              </li>
+              <li class="nav-link">
+                <i class="fa-solid fa-right-from-bracket text-light"></i>
+                <%= link_to "Log out", destroy_user_session_path, method: :delete, class: 'text-light' %>
+              </li>
+            <% else %>
+              <li class="nav-link">
+                <i class="fa-solid fa-house text-light"></i>
+                <%= link_to "Home", top_path, class: 'text-light' %>
+              </li>
+              <li class="nav-link">
+                <i class="fa-solid fa-link text-light"></i>
+                <%= link_to "About", about_path, class: 'text-light' %>
+              </li>
+              <li class="nav-link">
+                <i class="fa-solid fa-user-plus text-light"></i>
+                <%= link_to "Sign up", new_user_registration_path, class: 'text-light' %>
+              </li>
+              <li class="nav-link">
+                <i class="fa-solid fa-right-to-bracket text-light"></i>
+                <%= link_to "Log in", new_user_session_path, class: 'text-light' %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <main class="mt-3">
+      <%= flash[:notice] %>
+      <%= yield %>
+    </main>
+    <footer class="row mt-5">
+      <p class="mx-auto">CopyRight Infratop.inc</p>
+    </footer>
   </body>
 </html>

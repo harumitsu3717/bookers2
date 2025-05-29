@@ -1,0 +1,24 @@
+<div class="container">
+<div class="row">
+<div class="col-md-3">
+<%= render 'c_user', user: @user %>
+  </div>
+<div class="col-md-8 offset-md-1">
+  <h2>Book detail</h2>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th><%= image_tag @book.user.profile_image, size: "100x100" %><br>
+        <%= link_to @book.user.name, "/users/#{@book.user.id}" %></th>
+        <th><%= @book.title %></th>
+        <th><%= @book.body %></th>
+        <% if @book.user == current_user %>
+          <th><%= link_to "Edit", edit_book_path, class: 'btn btn-success' %></th>
+          <th><%= link_to "Destroy", book_path, method: :delete, "data-confirm" => "本当に消しますか？", class: 'btn btn-danger' %></th>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+</div>
